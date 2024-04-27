@@ -4,7 +4,8 @@
       Loading meteorites...
     </div>
     <div class="meteorite-grid" v-else-if="meteorites.length">
-      </div>
+      <Meteorite v-for="meteorite in meteorites" :key="meteorite.id" :meteorite-data="meteorite" />
+    </div>
     <div v-else>
       No meteorites found!
     </div>
@@ -30,7 +31,7 @@ export default {
     this.isLoading = true;
     try {
       const response = await axios.get(apiBaseUrl + '/meteorites');
-      this.meteorites = response.data.map(dto => ({
+      this.meteorites = response.data.data.map(dto => ({
         id: dto.id,
         name: dto.name,
         monnigNumber: dto.monnigNumber,
@@ -66,6 +67,7 @@ export default {
 
 <style scoped>
 .meteorite-page {
+  padding: 2rem 0; /* Top and bottom padding */
   display: flex;
   flex-direction: column;
   height: 100vh; /* Make the page fill the viewport height */
@@ -74,8 +76,8 @@ export default {
 
 .meteorite-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px; /* Add spacing between meteorites */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 0; /* Remove default gap */
 }
 
 .meteorite-row {
@@ -84,6 +86,10 @@ export default {
 }
 
 .meteorite {
-    border: 1px solid white;
-  }
+  margin: 0; /* Remove default margin */
+  padding: 5px; /* Add minimal padding if desired */
+  border: 1px solid white;
+}
+
 </style>
+
