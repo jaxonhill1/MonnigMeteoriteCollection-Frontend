@@ -1,26 +1,24 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="MonnigLogo" class="logo" src="@/assets/MonnigLogo.png" width="200" height="200" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
+        <!-- <RouterLink to="/">Home</RouterLink> -->
         <RouterLink to="/meteorites">Meteorites</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/login">Curator Login</RouterLink>
       </nav>
     </div>
   </header>
 
   <RouterView />
 </template>
+
+
 
 <style scoped>
 header {

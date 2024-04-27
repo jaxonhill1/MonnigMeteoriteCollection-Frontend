@@ -1,9 +1,9 @@
 <script setup>
-import Homepage from '../components/Homepage.vue'
+import LoanPage from '../components/LoanPage.vue'
 </script>
 
 <template>
   <main>
-    <Homepage />
+    <LoanPage />
   </main>
 </template>
