@@ -1,82 +1,95 @@
-<script setup>
-// import other components
-</script>
-
 <template>
-  <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
-    </template>
-    <template #heading>Monnig Meteorite Collection</template>
-
-    Homepage
-
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <ToolingIcon />
-    </template>
-    <template #heading>Tooling</template>
-
-    This project is served and bundled with
-    <a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener">Vite</a>. The
-    recommended IDE setup is
-    <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a> +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank" rel="noopener">Volar</a>. If
-    you need to test your components and web pages, check out
-    <a href="https://www.cypress.io/" target="_blank" rel="noopener">Cypress</a> and
-    <a href="https://on.cypress.io/component" target="_blank" rel="noopener"
-      >Cypress Component Testing</a
-    >.
-
-    <br />
-
-    More instructions are available in <code>README.md</code>.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <EcosystemIcon />
-    </template>
-    <template #heading>Ecosystem</template>
-
-    Get official tools and libraries for your project:
-    <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener">Pinia</a>,
-    <a href="https://router.vuejs.org/" target="_blank" rel="noopener">Vue Router</a>,
-    <a href="https://test-utils.vuejs.org/" target="_blank" rel="noopener">Vue Test Utils</a>, and
-    <a href="https://github.com/vuejs/devtools" target="_blank" rel="noopener">Vue Dev Tools</a>. If
-    you need more resources, we suggest paying
-    <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">Awesome Vue</a>
-    a visit.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <CommunityIcon />
-    </template>
-    <template #heading>Community</template>
-
-    Got stuck? Ask your question on
-    <a href="https://chat.vuejs.org" target="_blank" rel="noopener">Vue Land</a>, our official
-    Discord server, or
-    <a href="https://stackoverflow.com/questions/tagged/vue.js" target="_blank" rel="noopener"
-      >StackOverflow</a
-    >. You should also subscribe to
-    <a href="https://news.vuejs.org" target="_blank" rel="noopener">our mailing list</a> and follow
-    the official
-    <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">@vuejs</a>
-    twitter account for latest news in the Vue world.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <template #heading>Support Vue</template>
-
-    As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
-    <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
-  </WelcomeItem>
+  <div class="title">
+    <h1>Loans</h1>
+    <p>Click on a loan's name to see its details.</p>
+    <p>You can search by name, institution, phone, email, address, or archived status.</p>
+    <br>
+    <p>Search</p>
+    <input type="text" v-model="searchTerm" placeholder="Enter criteria..." @keyup.enter="searchLoans" />
+  </div>
+  <div class="loan-page">
+    <div v-if="isLoading">
+      Loading loans...
+    </div>
+    <div class="loan-grid" v-else-if="filteredLoans.length">
+      <Loan v-for="loan in filteredLoans" :key="loan.id" :loan-data="loan" />
+    </div>
+    <div v-else>
+      No loans found! Did you log in?
+    </div>
+  </div>
 </template>
+
+<script>
+
+import Loan from './Loan.vue';
+import axios from 'axios';
+import { apiBaseUrl } from '../config';
+import _ from 'lodash';
+
+export default {
+  components: {
+    Loan,
+  },
+  data() {
+    return {
+      loans: [],
+      isLoading: false,
+      sortField: 'id', // default sort field
+      searchTerm: '',
+    };
+  },
+  async mounted() {
+    this.isLoading = true;
+    try {
+      const response = await axios.get(apiBaseUrl + '/loans'); // Update endpoint for loans
+      this.loans = response.data.data.map(dto => ({
+        id: dto.id,
+        name: dto.name, // Assuming loan name exists
+        institution: dto.institution,
+        email: dto.email,
+        phone: dto.phone,
+        address: dto.address,
+        loanStartDate: dto.loanStartDate,
+        loanDueDate: dto.loanDueDate,
+        isArchived: dto.isArchived,
+        meteorites: dto.meteorites,
+        notes: dto.notes,
+        extraFiles: dto.extraFiles,
+      }));
+    } catch (error) {
+      console.error('Error fetching loans:', error);
+    } finally {
+      this.isLoading = false;
+    }
+  },
+  computed: {
+    filteredLoans() {
+      return this.loans.filter(loan => {
+        const searchTermLower = this.searchTerm.toLowerCase();
+        return (
+          loan.name.toLowerCase().includes(searchTermLower) ||
+          loan.institution.toLowerCase().includes(searchTermLower) ||
+          loan.email.toLowerCase().includes(searchTermLower) ||
+          loan.phone.toLowerCase().includes(searchTermLower) ||
+          loan.address.toLowerCase().includes(searchTermLower) ||
+          String(loan.isArchived).toLowerCase().includes(searchTermLower)
+        );
+      });
+    },
+    getLoanRows() {
+      const rows = [];
+      for (let i = 0; i < this.filteredLoans.length; i += 3) {
+        rows.push(this.loans.slice(i, i + 3));
+      }
+      return rows;
+    },
+  },
+  methods: {
+    searchLoans() {
+      // Implement additional logic for handling search terms here if needed
+    },
+  },
+};
+
+</script>

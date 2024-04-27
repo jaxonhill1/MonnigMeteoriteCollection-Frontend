@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import MeteoriteView from '../views/MeteoriteView.vue'
-import SingleMeteorite from '../views/SingleMeteorite.vue'
+import SingleMeteoriteView from '../views/SingleMeteoriteView.vue'
+import LoginView from '../views/LoginView.vue'
+import LoanView from '../views/LoanView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,7 +24,22 @@ const router = createRouter({
     {
       path: '/meteorites/:id',
       name: 'single-meteorite',
-      component: SingleMeteorite
+      component: SingleMeteoriteView
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
+    },
+    {
+      path: '/loans',
+      name: 'loans',
+      component: LoanView
+    },
+    {
+      path: '/loans/:id',
+      name: 'single-loan',
+      component: SingleLoanView
     },
   ]
 })
