@@ -1,10 +1,19 @@
 <template>
+  <div class="title">
+    <h1>Meteorites</h1>
+    <p>Click on a meteorite's name to see its details.</p>
+    <p>You can search by name, Monnig number, country, year found, or weight.</p>
+    <br>
+    <p>Search</p>
+    <!-- <input type="text" v-model="searchTerm" placeholder="Search meteorites..." @keyup.enter="searchMeteorites"/> -->
+    <input type="text" v-model="searchTerm" placeholder="Enter criteria..."/>
+  </div>
   <div class="meteorite-page">
     <div v-if="isLoading">
       Loading meteorites...
     </div>
-    <div class="meteorite-grid" v-else-if="meteorites.length">
-      <Meteorite v-for="meteorite in meteorites" :key="meteorite.id" :meteorite-data="meteorite" />
+    <div class="meteorite-grid" v-else-if="filteredMeteorites.length">
+      <Meteorite v-for="meteorite in filteredMeteorites" :key="meteorite.id" :meteorite-data="meteorite" />
     </div>
     <div v-else>
       No meteorites found!
@@ -16,6 +25,7 @@
 import Meteorite from './Meteorite.vue';
 import axios from 'axios';
 import { apiBaseUrl } from '../config';
+import _ from 'lodash';
 
 export default {
   components: {
@@ -25,6 +35,8 @@ export default {
     return {
       meteorites: [],
       isLoading: false,
+      sortField: 'id',  // default sort field
+      searchTerm: '',
     };
   },
   async mounted() {
@@ -53,23 +65,37 @@ export default {
     }
   },
   computed: {
+    filteredMeteorites() {
+      return this.meteorites.filter(meteorite => {
+        // Perform search based on user input (searchTerm)
+        const searchTermLower = this.searchTerm.toLowerCase();
+        return (
+          meteorite.name.toLowerCase().includes(searchTermLower) || 
+          meteorite.monnigNumber.toLowerCase().includes(searchTermLower) ||
+          meteorite.country.toLowerCase().includes(searchTermLower) ||
+          String(meteorite.yearFound).toLowerCase().includes(searchTermLower) ||
+          String(meteorite.weight).toLowerCase().includes(searchTermLower)
+        );
+      });
+    },
     getMeteoriteRows() {
       const rows = [];
-      for (let i = 0; i < this.meteorites.length; i += 3) {
+      for (let i = 0; i < this.filteredMeteorites.length; i += 3) {
         rows.push(this.meteorites.slice(i, i + 3));
       }
       return rows;
     },
   },
   methods: {
-    goToDetails(meteoriteId) {
-      this.$router.push(`/meteorites/\$${meteoriteId}`);
-    },
+    
   },
 };
 </script>
 
 <style scoped>
+.title {
+  padding-top: 70px;
+}
 .meteorite-page {
   padding: 2rem 0; /* Top and bottom padding */
   display: flex;
