@@ -1,5 +1,5 @@
 <script setup>
-// import other components
+// import any other components
 </script>
 
 <template>
