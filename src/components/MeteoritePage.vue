@@ -32,14 +32,19 @@ export default {
     try {
       const response = await axios.get(apiBaseUrl + '/meteorites');
       this.meteorites = response.data.data.map(dto => ({
-        id: dto.id,
-        name: dto.name,
-        monnigNumber: dto.monnigNumber,
-        country: dto.country,
-        group: dto.group,
-        yearFound: dto.yearFound,
-        weight: dto.weight.toString(),
-        // ... add other properties as needed
+        id: dto.id,                           // id
+
+        name: dto.name,                       // name
+        monnigNumber: dto.monnigNumber,       // monnig number
+        country: dto.country,                 // country
+        class: dto.class,                     // class
+        group: dto.group,                     // group
+        yearFound: dto.yearFound,             // yearFound
+        weight: dto.weight.toString(),        // weight
+
+        howFound: dto.howFound,               // howFound
+        sampleHistories: dto.sampleHistories, // sampleHistories is a List<Long>
+        loanId: dto.loan,                     // loanId of associated loan
       }));
     } catch (error) {
       console.error('Error fetching meteorites:', error);
@@ -58,8 +63,7 @@ export default {
   },
   methods: {
     goToDetails(meteoriteId) {
-      // Implement your router navigation logic here
-      this.$router.push(`/meteorites/${meteoriteId}`);
+      this.$router.push(`/meteorites/\$${meteoriteId}`);
     },
   },
 };
