@@ -4,6 +4,8 @@ import MeteoriteView from '../views/MeteoriteView.vue'
 import SingleMeteoriteView from '../views/SingleMeteoriteView.vue'
 import LoginView from '../views/LoginView.vue'
 import LoanView from '../views/LoanView.vue'
+import SingeLoanView from '../views/SingeLoanView.vue'
+import MeteoritePage from '@/components/MeteoritePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,11 +38,11 @@ const router = createRouter({
       name: 'loans',
       component: LoanView
     },
-    {
-      path: '/loans/:id',
-      name: 'single-loan',
-      component: SingleLoanView
-    },
+    // {
+    //   path: '/loans/:id',
+    //   name: 'single-loan',
+    //   component: SingleLoanView
+    // },
   ]
 })
 

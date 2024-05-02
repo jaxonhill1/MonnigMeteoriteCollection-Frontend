@@ -4,9 +4,8 @@
     <p>Click on a meteorite's name to see its details.</p>
     <p>You can search by name, Monnig number, country, year found, or weight.</p>
     <br>
-    <p>Search</p>
-    <!-- <input type="text" v-model="searchTerm" placeholder="Search meteorites..." @keyup.enter="searchMeteorites"/> -->
-    <input type="text" v-model="searchTerm" placeholder="Enter criteria..."/>
+    <h2>Search</h2>
+    <SearchMeteorites />
   </div>
   <div class="meteorite-page">
     <div v-if="isLoading">
@@ -23,6 +22,7 @@
 
 <script>
 import Meteorite from './Meteorite.vue';
+import SearchMeteorites from './SearchMeteorites.vue'; // Import the SearchMeteorites component
 import axios from 'axios';
 import { apiBaseUrl } from '../config';
 import _ from 'lodash';
@@ -30,12 +30,12 @@ import _ from 'lodash';
 export default {
   components: {
     Meteorite,
+    SearchMeteorites // Register the SearchMeteorites component
   },
   data() {
     return {
       meteorites: [],
       isLoading: false,
-      sortField: 'id',  // default sort field
       searchTerm: '',
     };
   },
@@ -43,21 +43,7 @@ export default {
     this.isLoading = true;
     try {
       const response = await axios.get(apiBaseUrl + '/meteorites');
-      this.meteorites = response.data.data.map(dto => ({
-        id: dto.id,                           // id
-
-        name: dto.name,                       // name
-        monnigNumber: dto.monnigNumber,       // monnig number
-        country: dto.country,                 // country
-        class: dto.class,                     // class
-        group: dto.group,                     // group
-        yearFound: dto.yearFound,             // yearFound
-        weight: dto.weight.toString(),        // weight
-
-        howFound: dto.howFound,               // howFound
-        sampleHistories: dto.sampleHistories, // sampleHistories is a List<Long>
-        loanId: dto.loan,                     // loanId of associated loan
-      }));
+      this.meteorites = response.data.content;
     } catch (error) {
       console.error('Error fetching meteorites:', error);
     } finally {
@@ -67,7 +53,6 @@ export default {
   computed: {
     filteredMeteorites() {
       return this.meteorites.filter(meteorite => {
-        // Perform search based on user input (searchTerm)
         const searchTermLower = this.searchTerm.toLowerCase();
         return (
           meteorite.name.toLowerCase().includes(searchTermLower) || 
@@ -78,16 +63,6 @@ export default {
         );
       });
     },
-    getMeteoriteRows() {
-      const rows = [];
-      for (let i = 0; i < this.filteredMeteorites.length; i += 3) {
-        rows.push(this.meteorites.slice(i, i + 3));
-      }
-      return rows;
-    },
-  },
-  methods: {
-    
   },
 };
 </script>
@@ -109,17 +84,4 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 0; /* Remove default gap */
 }
-
-.meteorite-row {
-  display: flex;
-  flex-wrap: wrap; /* Allow rows to wrap if necessary */
-}
-
-.meteorite {
-  margin: 0; /* Remove default margin */
-  padding: 5px; /* Add minimal padding if desired */
-  border: 1px solid white;
-}
-
 </style>
-
