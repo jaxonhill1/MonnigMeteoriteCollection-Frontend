@@ -7,6 +7,8 @@
     <br>
     <h2>Search</h2>
     <SearchMeteorites />
+    <h1>Add New Meteorite</h1>
+    <NewMeteoriteForm />
 
   </div>
   
@@ -15,13 +17,15 @@
 <script>
 import Meteorite from './MeteoriteDetails.vue';
 import SearchMeteorites from './SearchMeteorites.vue';
+import NewMeteoriteForm from './NewMeteoriteForm.vue';
 import axios from 'axios';
 import { apiBaseUrl } from '../config';
 
 export default {
   components: {
     Meteorite,
-    SearchMeteorites
+    SearchMeteorites,
+    NewMeteoriteForm
   },
   data() {
     return {
