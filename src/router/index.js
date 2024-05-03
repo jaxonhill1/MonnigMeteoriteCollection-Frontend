@@ -3,10 +3,12 @@ import HomeView from '../views/HomeView.vue'
 import MeteoriteView from '../views/MeteoriteView.vue'
 import SingleMeteoriteView from '../views/SingleMeteoriteView.vue'
 import LoginView from '../views/LoginView.vue'
-import LoanView from '../views/LoanView.vue'
-import SingeLoanView from '../views/SingeLoanView.vue'
-import MeteoritePage from '@/components/MeteoritePage.vue'
+import LoanView from '../views/loans/LoanView.vue'
+
+import LoanDetails from '@/views/loans/LoanDetails.vue'
 import MeteoriteDetails from '@/components/MeteoriteDetails.vue'
+
+import UpdateLoan from '@/views/loans/UpdateLoan.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +18,9 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+
+    // meteorite routes --------------------------------------------------------------------
+
     {
       path: '/meteorites',
       name: 'meteorites',
@@ -30,26 +35,36 @@ const router = createRouter({
       component: SingleMeteoriteView
     },
     {
+      path: '/meteorites/:id',
+      name: 'MeteoriteDetails',
+      component: MeteoriteDetails
+    },
+
+    // login ------------------------------------------------------------------------
+
+    {
       path: '/login',
       name: 'login',
       component: LoginView
     },
+
+    // loans -------------------------------------------------------------------------
+
     {
       path: '/loans',
       name: 'loans',
       component: LoanView
     },
     {
-      path: '/meteorites/:id',
-      name: 'MeteoriteDetails',
-      component: MeteoriteDetails
+      path: '/loans/:id',
+      name: 'LoanDetails',
+      component: LoanDetails
     },
-    
-    // {
-    //   path: '/loans/:id',
-    //   name: 'single-loan',
-    //   component: SingleLoanView
-    // },
+    {
+      path: '/loans/update/:id',
+      name: 'update-loan',
+      component: UpdateLoan
+    },
   ]
 })
 

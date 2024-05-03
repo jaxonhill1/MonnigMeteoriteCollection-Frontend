@@ -9,6 +9,8 @@
     <button @click="searchMeteorites">Search</button>
     <button @click="clearSearch">Clear</button> <!-- Clear Button -->
 
+    <br>
+
     <div v-if="loading" class="loading">Loading...</div>
     <div v-if="error" class="error">Error: {{ error }}</div>
     

@@ -1,5 +1,5 @@
 <script setup>
-import LoanPage from '../components/LoanPage.vue'
+import LoanPage from '../../components/loans/LoanPage.vue'
 </script>
 
 <template>
