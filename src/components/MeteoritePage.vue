@@ -1,36 +1,27 @@
 <template>
   <div class="title">
     <h1>Meteorites</h1>
-    <p>Click on a meteorite's name to see its details.</p>
     <p>You can search by name, Monnig number, country, year found, or weight.</p>
+    <p>Click search with no input to Find All Meteorites</p>
+    <p>Click on a meteorite's name to see its details.</p>
     <br>
     <h2>Search</h2>
     <SearchMeteorites />
+
   </div>
-  <div class="meteorite-page">
-    <div v-if="isLoading">
-      Loading meteorites...
-    </div>
-    <div class="meteorite-grid" v-else-if="filteredMeteorites.length">
-      <Meteorite v-for="meteorite in filteredMeteorites" :key="meteorite.id" :meteorite-data="meteorite" />
-    </div>
-    <div v-else>
-      No meteorites found!
-    </div>
-  </div>
+  
 </template>
 
 <script>
-import Meteorite from './Meteorite.vue';
-import SearchMeteorites from './SearchMeteorites.vue'; // Import the SearchMeteorites component
+import Meteorite from './MeteoriteDetails.vue';
+import SearchMeteorites from './SearchMeteorites.vue';
 import axios from 'axios';
 import { apiBaseUrl } from '../config';
-import _ from 'lodash';
 
 export default {
   components: {
     Meteorite,
-    SearchMeteorites // Register the SearchMeteorites component
+    SearchMeteorites
   },
   data() {
     return {
@@ -39,15 +30,20 @@ export default {
       searchTerm: '',
     };
   },
+  methods: {
+    showAllMeteorites() {
+      this.searchTerm = ''; // Reset the search term
+    }
+  },
   async mounted() {
     this.isLoading = true;
     try {
       const response = await axios.get(apiBaseUrl + '/meteorites');
-      this.meteorites = response.data.content;
+      this.meteorites = response.data.data.content;
     } catch (error) {
       console.error('Error fetching meteorites:', error);
     } finally {
-      this.isLoading = false; // Set loading to false even on errors
+      this.isLoading = false;
     }
   },
   computed: {
@@ -66,6 +62,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .title {

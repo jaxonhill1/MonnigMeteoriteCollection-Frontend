@@ -3,29 +3,33 @@
 </script>
 
 <template>
+  <section class="container">
+    <h1 class="title">Monnig Meteorite Collection</h1>
 
-  <h1>Monnig Meteorite Collection</h1>
+    <WelcomeItem class="welcome-item">
+      <template #icon>
+        <DocumentationIcon />
+      </template>
+      <template #heading>
+        <h2>Welcome to the Monnig Meteorite Collection</h2>
+      </template>
 
-  <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
-    </template>
-    <template #heading>Monnig Meteorite Collection</template>
+      <p>
+        Monnig Meteorite Collection is our Spring 2024 class project for Dr. Wei's Web Technology class. It is a full-stack application
+        featuring a Spring Boot backend and a frontend built using Vue 3.
+      </p>
 
-    <div>
-      Monnig Meteorite Collection is our Spring 2024 class project for Dr. Wei's Web Tech class. It is a fullstack application,
-      complete with a Springboot backend and a frontend built using Vue3.
-    </div>
-
-    <div>
-      <h2>Developers</h2>
-      <h4>Jaxon Hill</h4>
-      <h4>Peter Ho</h4>
-    </div>
-
-  </WelcomeItem>
-
+      <div class="developers">
+        <h2>Developers</h2>
+        <ul>
+          <li>Jaxon Hill</li>
+          <li>Peter Ho</li>
+        </ul>
+      </div>
+    </WelcomeItem>
+  </section>
 </template>
+
 
 <style>
   div{
