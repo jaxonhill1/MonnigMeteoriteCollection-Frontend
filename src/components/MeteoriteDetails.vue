@@ -15,11 +15,8 @@
     <p><span style="color: plum;">Group:</span> {{ meteorite.group }}</p>
     <p><span style="color: plum;">How Found:</span> {{ meteorite.howFound }}</p>
     <p><span style="color: plum;">Loan:</span> {{ meteorite.loan }}</p>
-    <p><span style="color: plum;">Sample Histories:</span></p>
     <br>
-    <div>
-      <SampleHistory :meteoriteId="meteorite.id" />
-    </div>
+    <SampleHistory :meteorite="meteorite.id" />
     <!-- Add more fields as per the associated information -->
   </div>
 </template>

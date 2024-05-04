@@ -1,5 +1,5 @@
 <script setup>
-import CreateLoan from '../../components/loans/CreateLoan.vue'
+import CreateLoan from '../../components/CreateHistory.vue'
 </script>
 
 <template>
