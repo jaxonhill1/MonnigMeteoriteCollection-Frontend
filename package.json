@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueform/multiselect": "^2.6.7",
     "axios": "^1.6.8",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",

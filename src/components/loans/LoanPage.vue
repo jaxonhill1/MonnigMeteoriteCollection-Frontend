@@ -1,11 +1,13 @@
 <template>
   <div class="title">
-    <h1>Loans</h1>
+    <h1 class="title">Loans</h1>        
     <p>You can search by name, institution & its address, email associated, or weight.</p>
     <p>Click on a loan's name to see its details.</p>
+    
     <br>
     <h2>Search</h2>
     <SearchLoans />
+    <RouterLink class="router-link" :to="`/loans/create`">Add A New Loan</RouterLink>
 
   </div>
   
@@ -80,4 +82,5 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 0; /* Remove default gap */
 }
+
 </style>

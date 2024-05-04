@@ -11,7 +11,7 @@
         <button @click="clearSearch">Clear</button> <!-- Clear Button -->
 
         <label>
-          View Archived Loans?
+          Include Archived Loans?
           <input type="checkbox" v-model="searchCriteria.isArchived" @change="handleArchiveCheckbox">
         </label>
     
@@ -22,12 +22,12 @@
         
         <br>
 
-        <ul v-if="results.length > 0">
+        <div v-if="results.length > 0">
             <li style="font-weight: 700; color: plum;">Name - Institution - Address</li>
             <li v-for="result in results" :key="result.id" @click="viewDetails(result.id)" class="clickable">
               {{ result.name }} - {{ result.institution }} - {{ result.address }}
             </li>
-        </ul>
+        </div>
         <div v-else>No results found</div>
     </div>
 

@@ -62,7 +62,7 @@
           alert('Failed to change archive status of the loan.');
         }
 
-        this.$router.back();
+        this.$router.push('/loans');
       },
     },
   };

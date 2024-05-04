@@ -9,6 +9,7 @@ import LoanDetails from '@/views/loans/LoanDetails.vue'
 import MeteoriteDetails from '@/components/MeteoriteDetails.vue'
 
 import UpdateLoan from '@/views/loans/UpdateLoan.vue'
+import CreateLoan from '@/views/loans/CreateLoanView.vue'
 import MeteoritesOnLoan from '@/views/MeteoritesOnLoanView.vue'
 
 const router = createRouter({
@@ -71,6 +72,11 @@ const router = createRouter({
       name: 'update-loan',
       component: UpdateLoan
     },
+    {
+      path: '/loans/create',
+      name: 'create-loan',
+      component: CreateLoan
+    }
   ]
 })
 
