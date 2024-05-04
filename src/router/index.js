@@ -11,6 +11,7 @@ import MeteoriteDetails from '@/components/MeteoriteDetails.vue'
 import UpdateLoan from '@/views/loans/UpdateLoan.vue'
 import CreateLoan from '@/views/loans/CreateLoanView.vue'
 import MeteoritesOnLoan from '@/views/MeteoritesOnLoanView.vue'
+import CreateHistoryView from '@/views/CreateHistoryView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,13 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
+    },
+
+    // histories ---------------------------------------------------------------------
+    {
+      path: '/histories/create/:meteoriteId',
+      name: 'create-history',
+      component: CreateHistoryView
     },
 
     // loans -------------------------------------------------------------------------
