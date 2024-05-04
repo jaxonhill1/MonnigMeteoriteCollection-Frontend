@@ -1,28 +1,48 @@
 <template>
-  <div>
-    <input v-model="searchCriteria.name" @keyup.enter="searchMeteorites" placeholder="Search by name (contains)" type="text" class="search-input" />
-    <input v-model="searchCriteria.monnigNumber" @keyup.enter="searchMeteorites" placeholder="Search by Monnig number (exact)" type="text" class="search-input" />
-    <input v-model="searchCriteria.country" @keyup.enter="searchMeteorites" placeholder="Search by country (contains)" type="text" class="search-input" />
-    <input v-model="searchCriteria._class" @keyup.enter="searchMeteorites" placeholder="Search by class (contains)" type="text" class="search-input" />
-    <input v-model="searchCriteria._group" @keyup.enter="searchMeteorites" placeholder="Search by group (contains)" type="text" class="search-input" />
-    <input v-model="searchCriteria.howFound" @keyup.enter="searchMeteorites" placeholder="Search by howFound (exact)" type="text" class="search-input" />
-    <button @click="searchMeteorites">Search</button>
-    <button @click="clearSearch">Clear</button> <!-- Clear Button -->
-
-    <br>
+  
+  <div class="container py-4">
+      <p>You can search by name, Monnig number, country, year found, or weight.</p>
+      <p>Click search with no input to find all meteorites.</p>
+      <p>Click on a meteorite's name to see its details.</p>
+    <div class="row g-3 mb-1">
+      
+      <div class="col-md-6">
+        <input v-model="searchCriteria.name" @keyup.enter="searchMeteorites" placeholder="Search by name (contains)" type="text" class="form-control" />
+      </div>
+      <div class="col-md-6">
+        <input v-model="searchCriteria.monnigNumber" @keyup.enter="searchMeteorites" placeholder="Search by Monnig number (exact)" type="text" class="form-control" />
+      </div>
+      <div class="col-md-6">
+        <input v-model="searchCriteria.country" @keyup.enter="searchMeteorites" placeholder="Search by country (contains)" type="text" class="form-control" />
+      </div>
+      <div class="col-md-6">
+        <input v-model="searchCriteria._class" @keyup.enter="searchMeteorites" placeholder="Search by class (contains)" type="text" class="form-control" />
+      </div>
+      <div class="col-md-6">
+        <input v-model="searchCriteria._group" @keyup.enter="searchMeteorites" placeholder="Search by group (contains)" type="text" class="form-control" />
+      </div>
+      <div class="col-md-6">
+        <input v-model="searchCriteria.howFound" @keyup.enter="searchMeteorites" placeholder="Search by howFound (exact)" type="text" class="form-control" />
+      </div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
+      <button class="btn btn-outline-light" @click="searchMeteorites">Search</button>
+      <button class="btn btn-outline-danger" @click="clearSearch">Clear</button>
+    </div>
 
     <div v-if="loading" class="loading">Loading...</div>
-    <div v-if="error" class="error">Error: {{ error }}</div>
+    <div v-if="error" class="alert alert-danger">Error: {{ error }}</div>
     
-    <ul v-if="results.length > 0">
-      <li style="font-weight: 700; color: plum;">Name - Country - MonnigNumber - Class - Group - HowFound</li>
-      <li v-for="result in results" :key="result.id" @click="viewDetails(result.id)" class="clickable">
+    <ul class="list-group" v-if="results.length > 0">
+      <li class="list-group-item active">Name - Country - MonnigNumber - Class - Group - HowFound</li>
+      <li v-for="result in results" :key="result.id" @click="viewDetails(result.id)" class="list-group-item list-group-item-action clickable">
         {{ result.name }} - {{ result.country }} - {{ result.monnigNumber }} - {{ result._class }} - {{ result.group }} - {{ result.howFound }}
       </li>
     </ul>
-    <div v-else>No results found</div>
+    <div v-else class="alert alert-info">No results found</div>
   </div>
 </template>
+
 
   
   <script>
@@ -100,6 +120,10 @@
   </script>
   
   <style scoped>
+  .container {
+  margin-top: 5rem; /* Adjust top margin to ensure visibility of the content below the header */
+    }
+
   .clickable {
     cursor: pointer;
     margin-bottom: 5px;
@@ -107,7 +131,7 @@
   }
 
   .clickable:hover {
-    background-color: #1f0202;  
+    background-color: #d9d2d2;  
   }
 
   .search-input {
@@ -116,18 +140,10 @@
     width: 200px;
   }
   
-  .loading,
-  .error {
-    margin-top: 10px;
-  }
-  
   ul {
     margin-top: 20px;
   }
   
-  li {
-    list-style: none;
-    margin-bottom: 5px;
-  }
+  
   </style>
   

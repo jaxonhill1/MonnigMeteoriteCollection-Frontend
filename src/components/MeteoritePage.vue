@@ -1,17 +1,33 @@
 <template>
-  <div class="title">
-    <h1>Meteorites</h1>
-    <p>You can search by name, Monnig number, country, year found, or weight.</p>
-    <p>Click search with no input to Find All Meteorites</p>
-    <p>Click on a meteorite's name to see its details.</p>
-    <br>
-    <h2>Search</h2>
-    <SearchMeteorites />
-    <h1>Add New Meteorite</h1>
-    <NewMeteoriteForm />
+  <div class="container mt-4">
+    <div class="mb-4">
+      <h1>Meteorites</h1>
+      <p>You can search by name, Monnig number, country, year found, or weight.</p>
+      <p>Click search with no input to find all meteorites.</p>
+      <p>Click on a meteorite's name to see its details.</p>
+    </div>
 
+    <div class="mt-2 mb-2">
+      <h2>Search Meteorite</h2>
+      <RouterLink to="/meteorites/search">
+        <button type="button" class="btn btn-outline-light">Search Meteorite</button>
+      </RouterLink>
+    </div>
+    
+    <div class="mt-2 mb-2">
+      <h2>Add New Meteorite</h2>
+      <RouterLink to="/meteorites/add">
+        <button type="button" class="btn btn-outline-light">Add a meteorite</button>
+      </RouterLink>
+
+      <div class="mt-2 mb-2">
+      <h2>Edit a Meteorite</h2>
+      <RouterLink to="/meteorites/edit">
+        <button type="button" class="btn btn-outline-light">Edit a meteorite</button>
+      </RouterLink>
+    </div>
+    </div>
   </div>
-  
 </template>
 
 <script>
@@ -66,23 +82,3 @@ export default {
   },
 };
 </script>
-
-
-<style scoped>
-.title {
-  padding-top: 70px;
-}
-.meteorite-page {
-  padding: 2rem 0; /* Top and bottom padding */
-  display: flex;
-  flex-direction: column;
-  height: 100vh; /*Make the page fill the viewport height*/
-  overflow-y: auto; /* Enable vertical scrolling */
-}
-
-.meteorite-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 0; /* Remove default gap */
-}
-</style>
