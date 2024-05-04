@@ -11,6 +11,9 @@ import MeteoriteDetails from '@/components/MeteoriteDetails.vue'
 import UpdateLoan from '@/views/loans/UpdateLoan.vue'
 import CreateLoan from '@/views/loans/CreateLoanView.vue'
 import MeteoritesOnLoan from '@/views/MeteoritesOnLoanView.vue'
+import NewMeteoriteForm from '@/components/NewMeteoriteForm.vue'
+import SearchMeteorites from '@/components/SearchMeteorites.vue'
+import MeteoriteEdit from '@/components/MeteoriteEdit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +33,21 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: MeteoriteView
+    },
+    {
+      path: '/meteorites/search',
+      name: 'SearchMeteorites',
+      component: SearchMeteorites
+    },
+    {
+      path: '/meteorites/edit',
+      name: 'MeteoriteEdit',
+      component: MeteoriteEdit
+    },
+    {
+      path: '/meteorites/add',
+      name: 'NewMeteoriteForm',
+      component: NewMeteoriteForm
     },
     {
       path: '/meteorites/:id',

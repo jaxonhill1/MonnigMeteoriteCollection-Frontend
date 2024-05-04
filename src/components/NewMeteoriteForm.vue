@@ -1,40 +1,45 @@
 <template>
-    <form @submit.prevent="submitForm">
-      <div>
-        <label for="name">Name:</label>
-        <input id="name" v-model="newMeteorite.name" type="text" required>
+  <div class="container mt-5">
+    <form @submit.prevent="submitForm" class="row g-3">
+      <div class="col-md-6">
+        <label for="name" class="form-label">Name:</label>
+        <input id="name" v-model="newMeteorite.name" type="text" class="form-control" required>
       </div>
-      <div>
-        <label for="monnigNumber">Monnig Number:</label>
-        <input id="monnigNumber" v-model="newMeteorite.monnigNumber" type="text" required>
+      <div class="col-md-6">
+        <label for="monnigNumber" class="form-label">Monnig Number:</label>
+        <input id="monnigNumber" v-model="newMeteorite.monnigNumber" type="text" class="form-control" required>
       </div>
-      <div>
-        <label for="country">Country:</label>
-        <input id="country" v-model="newMeteorite.country" type="text" required>
+      <div class="col-md-6">
+        <label for="country" class="form-label">Country:</label>
+        <input id="country" v-model="newMeteorite.country" type="text" class="form-control" required>
       </div>
-      <div>
-        <label for="class">Class:</label>
-        <input id="class" v-model="newMeteorite._class" type="text" required>
+      <div class="col-md-6">
+        <label for="class" class="form-label">Class:</label>
+        <input id="class" v-model="newMeteorite._class" type="text" class="form-control" required>
       </div>
-      <div>
-        <label for="group">Group:</label>
-        <input id="group" v-model="newMeteorite.group" type="text" required>
+      <div class="col-md-6">
+        <label for="group" class="form-label">Group:</label>
+        <input id="group" v-model="newMeteorite.group" type="text" class="form-control" required>
       </div>
-      <div>
-        <label for="yearFound">Year Found:</label>
-        <input id="yearFound" v-model="newMeteorite.yearFound" type="number" required>
+      <div class="col-md-6">
+        <label for="yearFound" class="form-label">Year Found:</label>
+        <input id="yearFound" v-model="newMeteorite.yearFound" type="number" class="form-control" required>
       </div>
-      <div>
-        <label for="weight">Weight:</label>
-        <input id="weight" v-model="newMeteorite.weight" type="number" step="0.01" required>
+      <div class="col-md-6">
+        <label for="weight" class="form-label">Weight:</label>
+        <input id="weight" v-model="newMeteorite.weight" type="number" class="form-control" step="0.01" required>
       </div>
-      <div>
-        <label for="howFound">How Found:</label>
-        <input id="howFound" v-model="newMeteorite.howFound" type="text" step="0.01" required>
+      <div class="col-md-6">
+        <label for="howFound" class="form-label">How Found:</label>
+        <input id="howFound" v-model="newMeteorite.howFound" type="text" class="form-control" required>
       </div>
-      <button type="submit">Add Meteorite</button>
+      <div class="col-12">
+        <button type="submit" class="btn btn-outline-light">Add Meteorite</button>
+      </div>
     </form>
-  </template>
+  </div>
+</template>
+
   
   <script>
   import axios from 'axios';
@@ -59,11 +64,11 @@
     },
     methods: {
       async submitForm() {
-    const token = localStorage.getItem('authToken');
-    const headers = {
+        const token = localStorage.getItem('authToken');
+        const headers = {
         Authorization: `Bearer ${token}`
-    };
-    console.log('Data being sent:', JSON.stringify(this.newMeteorite));
+        };
+        console.log('Data being sent:', JSON.stringify(this.newMeteorite));
 
     try {
         const response = await axios.post(`${apiBaseUrl}/meteorites`, this.newMeteorite, { headers });

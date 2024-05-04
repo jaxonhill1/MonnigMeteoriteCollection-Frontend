@@ -1,6 +1,6 @@
 <template>
     <div class="title">
-        <RouterLink :to="`/loans/${loanId}`">< Go Back</RouterLink>
+        <RouterLink :to="`/loans/${loanId}`"> Go Back</RouterLink>
         <h1>Meteorites on Loan {{ loanId }}</h1>
         <p>View all meteorites associated with this loan below.</p>
         <br>

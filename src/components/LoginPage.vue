@@ -1,13 +1,21 @@
 <template>
-  <form @submit.prevent="submit">
+  <main class="form-signin w-100 m-auto">
+    <form @submit.prevent="submit">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-    <input v-model="data.username" type="text" class="form-control" placeholder="Username" required>
+    <div class="">
+      <input v-model="data.username" type="text" class="form-control" id="floatingInput" placeholder="Username" required>
+    </div>
 
-    <input v-model="data.password" type="password" class="form-control" placeholder="Password" required>
-
+    <div>
+      <input v-model="data.password" type="password" class="form-control" placeholder="Password" required>
+    </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-  </form>
+    </form>
+  </main>
+  
+
+
 </template>
 
 <script lang="ts">
@@ -60,26 +68,17 @@ if (responseData && responseData.data && responseData.data.token) {
 </script>
 
 <style>
+html,
+body {
+  height: 100%;
+}
+
 .form-signin {
-  width: 100%;
   max-width: 330px;
-  padding: 15px;
-  margin: auto;
+  padding: 1rem;
 }
 
-.form-signin .checkbox {
-  font-weight: 400;
-}
-
-.form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
-}
-
-.form-signin .form-control:focus {
+.form-signin .form-floating:focus-within {
   z-index: 2;
 }
 
@@ -94,6 +93,7 @@ if (responseData && responseData.data && responseData.data.token) {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
 </style>
 
 
