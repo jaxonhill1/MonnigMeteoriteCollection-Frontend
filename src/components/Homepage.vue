@@ -4,7 +4,7 @@
 
 <template>
   <section class="container">
-    <h1 class="title">Monnig Meteorite Collection</h1>
+    <h1 class="title" style="color: white;">Monnig Meteorite Collection</h1>
 
     <WelcomeItem class="welcome-item">
       <template #icon>
