@@ -15,7 +15,8 @@
     <p><span style="color: plum;">Group:</span> {{ meteorite.group }}</p>
     <p><span style="color: plum;">How Found:</span> {{ meteorite.howFound }}</p>
     <p><span style="color: plum;">Loan:</span> {{ meteorite.loan }}</p>
-    <p><span style="color: plum;">Sample History:</span> {{ meteorite.sampleHistory }}</p>
+    <br>
+    <SampleHistory :meteorite="meteorite.id" />
     <!-- Add more fields as per the associated information -->
   </div>
 </template>
@@ -23,8 +24,12 @@
 <script>
 import axios from 'axios';
 import { apiBaseUrl } from '../config';
+import SampleHistory from './SampleHistory.vue';
 
 export default {
+  components: {
+    SampleHistory,
+  },
   data() {
     return {
       meteorite: {},
