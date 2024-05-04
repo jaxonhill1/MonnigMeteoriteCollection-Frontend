@@ -1,82 +1,100 @@
-<script setup>
-// import other components
+<template>
+  <form @submit.prevent="submit">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <input v-model="data.username" type="text" class="form-control" placeholder="Username" required>
+
+    <input v-model="data.password" type="password" class="form-control" placeholder="Password" required>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+  </form>
+</template>
+
+<script lang="ts">
+import {reactive} from 'vue';
+import {useRouter} from "vue-router";
+
+export default {
+  name: "Login",
+  setup() {
+    const data = reactive({
+      username: '',
+      password: ''
+    });
+    const router = useRouter();
+
+    const submit = async () => {
+  try {
+    const response = await fetch('http://localhost:8080/api/v1/users/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      credentials: 'include',
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to login');
+    }
+
+    const responseData = await response.json(); // Parsing the JSON response
+if (responseData && responseData.data && responseData.data.token) {
+    localStorage.setItem('authToken', responseData.data.token); // Storing the token
+    console.log('Login successful:', responseData);
+    await router.push('/');
+} else {
+    throw new Error('Token not found in response');
+}
+
+  } catch (error) {
+    console.error('Login error:', error);
+  }
+}
+
+
+    return {
+      data,
+      submit
+    }
+  }
+}
 </script>
 
-<template>
-  <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
-    </template>
-    <template #heading>Monnig Meteorite Collection</template>
+<style>
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
 
-    Homepage
+.form-signin .checkbox {
+  font-weight: 400;
+}
 
-  </WelcomeItem>
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
 
-  <WelcomeItem>
-    <template #icon>
-      <ToolingIcon />
-    </template>
-    <template #heading>Tooling</template>
+.form-signin .form-control:focus {
+  z-index: 2;
+}
 
-    This project is served and bundled with
-    <a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener">Vite</a>. The
-    recommended IDE setup is
-    <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a> +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank" rel="noopener">Volar</a>. If
-    you need to test your components and web pages, check out
-    <a href="https://www.cypress.io/" target="_blank" rel="noopener">Cypress</a> and
-    <a href="https://on.cypress.io/component" target="_blank" rel="noopener"
-      >Cypress Component Testing</a
-    >.
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
-    <br />
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
 
-    More instructions are available in <code>README.md</code>.
-  </WelcomeItem>
 
-  <WelcomeItem>
-    <template #icon>
-      <EcosystemIcon />
-    </template>
-    <template #heading>Ecosystem</template>
 
-    Get official tools and libraries for your project:
-    <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener">Pinia</a>,
-    <a href="https://router.vuejs.org/" target="_blank" rel="noopener">Vue Router</a>,
-    <a href="https://test-utils.vuejs.org/" target="_blank" rel="noopener">Vue Test Utils</a>, and
-    <a href="https://github.com/vuejs/devtools" target="_blank" rel="noopener">Vue Dev Tools</a>. If
-    you need more resources, we suggest paying
-    <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">Awesome Vue</a>
-    a visit.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <CommunityIcon />
-    </template>
-    <template #heading>Community</template>
-
-    Got stuck? Ask your question on
-    <a href="https://chat.vuejs.org" target="_blank" rel="noopener">Vue Land</a>, our official
-    Discord server, or
-    <a href="https://stackoverflow.com/questions/tagged/vue.js" target="_blank" rel="noopener"
-      >StackOverflow</a
-    >. You should also subscribe to
-    <a href="https://news.vuejs.org" target="_blank" rel="noopener">our mailing list</a> and follow
-    the official
-    <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">@vuejs</a>
-    twitter account for latest news in the Vue world.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <template #heading>Support Vue</template>
-
-    As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
-    <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
-  </WelcomeItem>
-</template>

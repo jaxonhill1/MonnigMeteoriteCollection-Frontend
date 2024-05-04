@@ -76,7 +76,7 @@ export default {
   padding: 2rem 0; /* Top and bottom padding */
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Make the page fill the viewport height */
+  height: 100vh; /*Make the page fill the viewport height*/
   overflow-y: auto; /* Enable vertical scrolling */
 }
 
