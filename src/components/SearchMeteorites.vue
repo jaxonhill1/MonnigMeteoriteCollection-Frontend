@@ -15,7 +15,7 @@
     <div v-if="error" class="error">Error: {{ error }}</div>
     
     <ul v-if="results.length > 0">
-      <li style="font-weight: 700; color: aqua;">Name - Country - MonnigNumber - Class - Group - HowFound</li>
+      <li style="font-weight: 700; color: plum;">Name - Country - MonnigNumber - Class - Group - HowFound</li>
       <li v-for="result in results" :key="result.id" @click="viewDetails(result.id)" class="clickable">
         {{ result.name }} - {{ result.country }} - {{ result.monnigNumber }} - {{ result._class }} - {{ result.group }} - {{ result.howFound }}
       </li>

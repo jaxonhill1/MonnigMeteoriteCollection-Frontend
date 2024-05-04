@@ -1,5 +1,6 @@
 <template>
-    <h2>Update Loan</h2>
+  <RouterLink :to="`/loans/${loan.id}`">< Go Back</RouterLink>    
+  <h2>Update Loan</h2>
     <div class="loan-form">
       <form @submit.prevent="submitLoan">
         <label for="name">Name:</label>

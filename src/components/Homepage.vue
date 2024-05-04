@@ -19,12 +19,12 @@
         featuring a Spring Boot backend and a frontend built using Vue 3.
       </p>
 
+      <br>
+
       <div class="developers">
         <h2>Developers</h2>
-        <ul>
-          <li>Jaxon Hill</li>
-          <li>Peter Ho</li>
-        </ul>
+        <h4>Jaxon Hill</h4>
+        <h4>Peter Ho</h4>
       </div>
     </WelcomeItem>
   </section>

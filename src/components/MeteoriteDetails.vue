@@ -7,15 +7,15 @@
   </div>
   <div v-else class="meteorite-details">
     <h1>{{ meteorite.name }}</h1>
-    <p><span style="color: aqua;">Monnig Number:</span> {{ meteorite.monnigNumber }}</p>
-    <p><span style="color: aqua;">Country:</span> {{ meteorite.country }}</p>
-    <p><span style="color: aqua;">Year Found:</span> {{ meteorite.yearFound }}</p>
-    <p><span style="color: aqua;">Weight:</span> {{ meteorite.weight }} grams</p>
-    <p><span style="color: aqua;">Class:</span> {{ meteorite._class }}</p>
-    <p><span style="color: aqua;">Group:</span> {{ meteorite.group }}</p>
-    <p><span style="color: aqua;">How Found:</span> {{ meteorite.howFound }}</p>
-    <p><span style="color: aqua;">Loan:</span> {{ meteorite.loan }}</p>
-    <p><span style="color: aqua;">Sample History:</span> {{ meteorite.sampleHistory }}</p>
+    <p><span style="color: plum;">Monnig Number:</span> {{ meteorite.monnigNumber }}</p>
+    <p><span style="color: plum;">Country:</span> {{ meteorite.country }}</p>
+    <p><span style="color: plum;">Year Found:</span> {{ meteorite.yearFound }}</p>
+    <p><span style="color: plum;">Weight:</span> {{ meteorite.weight }} grams</p>
+    <p><span style="color: plum;">Class:</span> {{ meteorite._class }}</p>
+    <p><span style="color: plum;">Group:</span> {{ meteorite.group }}</p>
+    <p><span style="color: plum;">How Found:</span> {{ meteorite.howFound }}</p>
+    <p><span style="color: plum;">Loan:</span> {{ meteorite.loan }}</p>
+    <p><span style="color: plum;">Sample History:</span> {{ meteorite.sampleHistory }}</p>
     <!-- Add more fields as per the associated information -->
   </div>
 </template>

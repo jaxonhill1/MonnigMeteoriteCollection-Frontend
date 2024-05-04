@@ -9,6 +9,11 @@
         <br>
         <button @click="searchLoans">Search</button>
         <button @click="clearSearch">Clear</button> <!-- Clear Button -->
+
+        <label>
+          View Archived Loans?
+          <input type="checkbox" v-model="searchCriteria.isArchived" @change="handleArchiveCheckbox">
+        </label>
     
         <br>
     
@@ -18,9 +23,9 @@
         <br>
 
         <ul v-if="results.length > 0">
-            <li style="font-weight: 700; color: aqua;">Name - Institution - Address</li>
+            <li style="font-weight: 700; color: plum;">Name - Institution - Address</li>
             <li v-for="result in results" :key="result.id" @click="viewDetails(result.id)" class="clickable">
-            {{ result.name }} - {{ result.institution }} - {{ result.address }}
+              {{ result.name }} - {{ result.institution }} - {{ result.address }}
             </li>
         </ul>
         <div v-else>No results found</div>
@@ -42,16 +47,15 @@
             email: '',
             phone: '',
             address: '',
-            isArchived: ''
+            isArchived: false,
           },
           results: [],
           loading: false,
           error: null,
-          searchFlag: false,
         };
       },
 
-      // pull ALL loans upon mounting
+      // pull ALL non-archived loans upon mounting
       mounted() {
         this.searchLoans();
       },
@@ -68,7 +72,7 @@
                 email: this.searchCriteria.email,
                 phone: this.searchCriteria.phone,
                 address: this.searchCriteria.address,
-                isArchived: this.searchCriteria.isArchived
+                isArchived: this.searchCriteria.isArchived,
             };
             
             axios.post(apiBaseUrl + `/loans/search`, searchCriteria, {
@@ -92,14 +96,13 @@
         },
 
         clearSearch() {
-            this.searchFlag = false;  // flag that the user has cleared search
             this.searchCriteria = {
-                    name: '',
-                    institution: '',
-                    email: '',
-                    phone: '',
-                    address: '',
-                    isArchived: ''
+              name: '',
+              institution: '',
+              email: '',
+              phone: '',
+              address: '',
+              isArchived: false,
             };  // Clear search input
             this.results = [];      // Clear search results
             this.searchLoans();     // call another search with empty criteria, to GET all loans
@@ -107,7 +110,13 @@
 
         viewDetails(id) {
             this.$router.push({ name: 'LoanDetails', params: { id: id } });
+        },
+
+        handleArchiveCheckbox() {
+          // perform a search with the new value of isArchived
+          this.searchLoans();
         }
+
     }
   
   
@@ -119,11 +128,11 @@
     .clickable {
       cursor: pointer;
       margin-bottom: 5px;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.5s ease;
     }
   
     .clickable:hover {
-      background-color: #1f0202;  
+      background-color: #5007c4;  
     }
   
     .search-input {
