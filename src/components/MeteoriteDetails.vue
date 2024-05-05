@@ -6,7 +6,19 @@
     Error: {{ error }}
   </div>
   <div v-else class="meteorite-details">
-    <h1>{{ meteorite.name }}</h1>
+    <div class="details-header">
+      <h1>{{ meteorite.name }}</h1>
+
+        <RouterLink :to="`/meteorites/edit/${meteorite.id}`">
+          <button type="button" class="btn btn-outline-light">Edit</button>
+        </RouterLink>
+        <RouterLink :to="`/meteorites/delete/${meteorite.id}`">
+          <button type="button" class="btn btn-outline-light">Delete</button>
+        </RouterLink>
+
+      
+      
+    </div>
     <p><span style="color: plum;">Monnig Number:</span> {{ meteorite.monnigNumber }}</p>
     <p><span style="color: plum;">Country:</span> {{ meteorite.country }}</p>
     <p><span style="color: plum;">Year Found:</span> {{ meteorite.yearFound }}</p>
@@ -17,7 +29,6 @@
     <p><span style="color: plum;">Loan:</span> {{ meteorite.loan }}</p>
     <br>
     <SampleHistory :meteorite="meteorite.id" />
-    <!-- Add more fields as per the associated information -->
   </div>
 </template>
 
@@ -52,9 +63,25 @@ export default {
 
 <style scoped>
 .meteorite-details {
-  margin: 20px;
+  margin: 10px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between; /* Aligns children (h1 and button) on opposite sides */
+  align-items: center; /* Aligns children vertically */
+}
+/* .edit-delete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+} */
+
+.details-header h1 {
+  margin-bottom: 0; /* Removes bottom margin from h1 to align better with button */
 }
 </style>
