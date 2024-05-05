@@ -17,6 +17,7 @@ import SearchMeteorites from '@/components/SearchMeteorites.vue'
 import MeteoriteEdit from '@/components/MeteoriteEdit.vue'
 
 import CreateHistoryView from '@/views/CreateHistoryView.vue'
+import MeteoriteDelete from '@/components/MeteoriteDelete.vue'
 
 
 const router = createRouter({
@@ -39,14 +40,22 @@ const router = createRouter({
       component: MeteoriteView
     },
     {
+      path: '/meteorites/delete/:id',
+      name: 'MeteoriteDelete',
+      component: MeteoriteDelete,
+      props: true
+    },
+    
+    {
       path: '/meteorites/search',
       name: 'SearchMeteorites',
       component: SearchMeteorites
     },
     {
-      path: '/meteorites/edit',
+      path: '/meteorites/edit/:id', // :id is the dynamic segment
       name: 'MeteoriteEdit',
-      component: MeteoriteEdit
+      component: MeteoriteEdit,
+      props: true  // Enables the id parameter to be passed as a prop to the MeteoriteEdit component
     },
     {
       path: '/meteorites/add',

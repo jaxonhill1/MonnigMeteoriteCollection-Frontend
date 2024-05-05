@@ -73,7 +73,7 @@
   
   <style scoped>
   .title {
-    padding-top: 70px;
+    padding-top: 20px;
   }
   .meteorite-page {
     padding: 2rem 0; /* Top and bottom padding */

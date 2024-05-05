@@ -7,24 +7,24 @@
       <p>Click on a meteorite's name to see its details.</p>
     </div>
 
-    <div class="mt-2 mb-2">
-      <h2>Search Meteorite</h2>
+    <div class="mt-3 mb-3">
+      <h2>Search and Edit (curator) Meteorite</h2>
       <RouterLink to="/meteorites/search">
         <button type="button" class="btn btn-outline-light">Search Meteorite</button>
       </RouterLink>
     </div>
     
-    <div class="mt-2 mb-2">
+    <div class="mt-3 mb-3">
       <h2>Add New Meteorite</h2>
       <RouterLink to="/meteorites/add">
         <button type="button" class="btn btn-outline-light">Add a meteorite</button>
       </RouterLink>
 
       <div class="mt-2 mb-2">
-      <h2>Edit a Meteorite</h2>
+      <!-- <h2>Edit a Meteorite</h2>
       <RouterLink to="/meteorites/edit">
         <button type="button" class="btn btn-outline-light">Edit a meteorite</button>
-      </RouterLink>
+      </RouterLink> -->
     </div>
     </div>
   </div>

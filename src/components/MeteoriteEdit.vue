@@ -1,27 +1,31 @@
 <template>
-    <div class="container mt-3">
-      <h2>Edit Meteorite Sample</h2>
-      <form @submit.prevent="submitChanges">
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name" v-model="meteorite.name">
-        </div>
-        <div class="mb-3">
-          <label for="monnigNumber" class="form-label">Monnig Number</label>
-          <input type="text" class="form-control" id="monnigNumber" v-model="meteorite.monnigNumber">
-        </div>
-        <!-- Add other fields as necessary -->
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-      </form>
-      <div v-if="warning" class="alert alert-warning mt-3">
-        {{ warning }}
+  <div class="container mt-3">
+    <h2>Edit Meteorite Sample</h2>
+    <form @submit.prevent="submitChanges" class="row g-2">
+      <!-- Iterate over fields and use Bootstrap grid to manage layout -->
+      <div v-for="(value, key) in meteorite" :key="key" class="col-md-4">
+        <label :for="key" class="form-label">{{ formatLabel(key) }}</label>
+        <input :id="key"
+               v-model="meteorite[key]"
+               :type="inputType(key)"
+               :step="key === 'weight' ? '0.001' : '1'"
+               class="form-control">
       </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-outline-light">Save Changes</button>
+      </div>
+    </form>
+    <div v-if="warning" class="alert alert-warning mt-3">
+      {{ warning }}
     </div>
-  </template>
-  
-  <script>
+  </div>
+</template>
+
+
+<script>
 import axios from 'axios';
 import { ref } from 'vue';
+import MeteoriteDetailsVue from './MeteoriteDetails.vue';
 
 export default {
   data() {
@@ -31,6 +35,16 @@ export default {
     };
   },
   methods: {
+    inputType(key) {
+    // Determine the input type based on the data key
+    if (key === 'yearFound') {
+      return 'number'; // Integer is fine for years
+    } else if (key === 'weight') {
+      return 'number'; // Specify that this input should allow decimal values
+    } else {
+      return 'text'; // Default type for other inputs
+    }
+  },
     fetchMeteoriteDetails() {
       axios.get(`http://localhost:8080/api/v1/meteorites/${this.$route.params.id}`)
         .then(response => {
